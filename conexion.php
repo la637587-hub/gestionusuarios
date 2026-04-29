@@ -1,5 +1,5 @@
 <?php
-$host = " mysql-johis.alwaysdata.net";
+$host = "mysql-johis.alwaysdata.net";
 $user = "johis";
 $pass = "Clase1234";
 $db = "johis_gestion";
