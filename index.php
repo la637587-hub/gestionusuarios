@@ -1,6 +1,6 @@
 <?php include("conexion.php"); ?>
 
-<h2>Lista de Usuarios</h2>
+<h2>Lista de Usuarios1</h2>
 <a href="crear.php">Agregar Usuario</a>
 
 <table border="1">
