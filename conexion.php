@@ -1,8 +1,8 @@
 <?php
 $host = " mysql-johis.alwaysdata.net"; // cambia si tu hosting da otro
-$user = "johis_gestion_usuarios";
+$user = "johis";
 $pass = "Clase1234";
-$db = "gestion_usuarios";
+$db = "johis_gestion_usuarios";
 
 $conn = new mysqli($host, $user, $pass, $db);
 
