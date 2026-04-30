@@ -1,12 +1,7 @@
-<?php
-include("conexion.php");
+<?php include("conexion.php");
 
 $id = $_GET['id'];
-
-$stmt = $conn->prepare("DELETE FROM usuarios WHERE id=?");
-$stmt->bind_param("i", $id);
-
-$stmt->execute();
+$conexion->query("DELETE FROM usuarios WHERE id=$id");
 
 header("Location: index.php");
 ?>
