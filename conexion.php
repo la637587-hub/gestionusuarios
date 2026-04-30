@@ -1,14 +1,7 @@
 <?php
-$host = " mysql-johis.alwaysdata.net"; // cambia si tu hosting da otro
-$user = "johis";
-$pass = "Clase1234";
-$db = "johis_gestion_usuarios";
+$conexion = new mysqli("mysql-johis.alwaysdata.net", "johis", "Clase1234", "johis_gestion_usuarios");
 
-$conn = newmysqli($host, $user, $pass, $db);
-
-if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
+if ($conexion->connect_error) {
+    die("Error de conexión: " . $conexion->connect_error);
 }
-
-$conn->set_charset("utf8");
 ?>
