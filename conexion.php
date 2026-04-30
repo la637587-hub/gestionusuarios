@@ -4,7 +4,7 @@ $user = "johis";
 $pass = "Clase1234";
 $db = "johis_gestion_usuarios";
 
-$conn = new mysqli($host, $user, $pass, $db);
+$conn = newmysqli($host, $user, $pass, $db);
 
 if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
