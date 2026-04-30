@@ -2,31 +2,30 @@
 include("conexion.php");
 
 $id = $_GET['id'];
-$sql = "SELECT * FROM usuarios WHERE id=$id";
-$result = $conn->query($sql);
+
+$stmt = $conn->prepare("SELECT * FROM usuarios WHERE id=?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
 $user = $result->fetch_assoc();
 ?>
 
 <h2>Editar Usuario</h2>
 
 <form method="POST">
-    Nombre: <input type="text" name="nombre" value="<?php echo $user['nombre']; ?>"><br>
-    Cédula: <input type="text" name="cedula" value="<?php echo $user['cedula']; ?>"><br>
-    Teléfono: <input type="text" name="telefono" value="<?php echo $user['telefono']; ?>"><br>
-    <input type="submit" name="actualizar" value="Actualizar">
+    <input type="text" name="nombre" value="<?= $user['nombre'] ?>" required><br>
+    <input type="text" name="cedula" value="<?= $user['cedula'] ?>" required><br>
+    <input type="text" name="telefono" value="<?= $user['telefono'] ?>" required><br>
+    <button type="submit">Actualizar</button>
 </form>
 
 <?php
-if(isset($_POST['actualizar'])) {
-    $nombre = $_POST['nombre'];
-    $cedula = $_POST['cedula'];
-    $telefono = $_POST['telefono'];
+if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $sql = "UPDATE usuarios 
-            SET nombre='$nombre', cedula='$cedula', telefono='$telefono'
-            WHERE id=$id";
+    $stmt = $conn->prepare("UPDATE usuarios SET nombre=?, cedula=?, telefono=? WHERE id=?");
+    $stmt->bind_param("sssi", $_POST['nombre'], $_POST['cedula'], $_POST['telefono'], $id);
 
-    if($conn->query($sql)) {
+    if($stmt->execute()){
         header("Location: index.php");
     }
 }

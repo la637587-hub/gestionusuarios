@@ -3,23 +3,22 @@
 <h2>Crear Usuario</h2>
 
 <form method="POST">
-    Nombre: <input type="text" name="nombre"><br>
-    Cédula: <input type="text" name="cedula"><br>
-    Teléfono: <input type="text" name="telefono"><br>
-    <input type="submit" name="guardar" value="Guardar">
+    <input type="text" name="nombre" placeholder="Nombre" required><br>
+    <input type="text" name="cedula" placeholder="Cédula" required><br>
+    <input type="text" name="telefono" placeholder="Teléfono" required><br>
+    <button type="submit">Guardar</button>
 </form>
 
 <?php
-if(isset($_POST['guardar'])) {
-    $nombre = $_POST['nombre'];
-    $cedula = $_POST['cedula'];
-    $telefono = $_POST['telefono'];
+if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $sql = "INSERT INTO usuarios (nombre, cedula, telefono)
-            VALUES ('$nombre', '$cedula', '$telefono')";
+    $stmt = $conn->prepare("INSERT INTO usuarios (nombre, cedula, telefono) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $_POST['nombre'], $_POST['cedula'], $_POST['telefono']);
 
-    if($conn->query($sql)) {
+    if($stmt->execute()){
         header("Location: index.php");
+    } else {
+        echo "Error al guardar";
     }
 }
 ?>

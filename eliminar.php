@@ -3,9 +3,10 @@ include("conexion.php");
 
 $id = $_GET['id'];
 
-$sql = "DELETE FROM usuarios WHERE id=$id";
+$stmt = $conn->prepare("DELETE FROM usuarios WHERE id=?");
+$stmt->bind_param("i", $id);
 
-if($conn->query($sql)) {
-    header("Location: index.php");
-}
+$stmt->execute();
+
+header("Location: index.php");
 ?>
